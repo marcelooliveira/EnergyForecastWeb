@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: forecast-web
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: forecast-web
+  template:
+    metadata:
+      labels:
+        app: forecast-web
+    spec:
+      containers:
+      - name: forecast-web
+        image: openaidemoacr.azurecr.io/forecast-web:latest
+        ports:
+        - containerPort: 8501
+        env:
+        - name: ENERGYFORECASTAPI_IP
+          value: "172.212.112.2"
